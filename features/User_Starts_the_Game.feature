@@ -1,7 +1,7 @@
-Feature: User starts a times table game
+Feature: User starts a Reflex Jr. game
 
 as a user
-I want to start the times table game
+I want to start the Reflex Jr. game
 so that I can learn my multiplication tables
 
 Scenario: New user starts game
