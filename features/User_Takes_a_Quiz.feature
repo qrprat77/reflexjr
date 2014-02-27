@@ -10,15 +10,27 @@ collect.
 
 	Scenario Outline: Katie answers a problem
 		Given I am taking a "<type>" quiz
-		When I answer "<equation>" with "<answer>"
+		When I answer the problem "<first_num>" "<type>" "<second_num>" with "<answer>"
 		Then the feedback is "<response>"
-		And the "<equation>" is "<marked_or_not>"
 		
 		Scenarios: Katie answers correctly
-		|  type  | equation | answer | response | marked_or_not |
-		| :times |   6 * 8  |   48   | Correct  |       nil     |
+		|  type  | first_num | second_num | answer | response |
+		|  times |     6     |      8     |    48  | correct  |
 		
 		Scenarios: Katie answers incorrectly
-		|  type  | equation | answer |  response  | marked_or_not |
-		| :times |   6 * 8  |   84   | Incorrect  |    marked     |
- 
+		|  type  | first_num | second_num | answer | response |
+		|  times |     6     |      8     |    84  | incorrect|
+		 
+	Scenario Outline: Katie takes the quiz
+		Given I am taking a "<type>" quiz
+		When my answers are "<state>"
+		Then my score is "<score>" 
+		And each wrong "<equation>" is added to my file
+		
+		Scenarios: Katie answers all questions correctly
+		|  type  |    state    | score | equation |
+		|  times | all_correct |  100  |   nil    |
+		
+		Scenarios: Katie answers some questions incorrectly
+		|  type  |    state     | score  | equation |
+		|  times | some_correct |  <100  |    >0    |
