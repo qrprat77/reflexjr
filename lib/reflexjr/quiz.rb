@@ -14,11 +14,10 @@ class Quiz
 			num_right = 0
 			tot_num = @quiz_probs.count
 			@quiz_probs.each do|prob|
-				if prob.state == "Correct" 
-					num_right += 1 
-				end
+				prob.state == "Correct" ? num_right += 1 : next
 			end
-			return ((num_right/tot_num)*100)
+		
+			return ((num_right * 100)/tot_num)
 		end
 		
 		def takequiz(input = STDIN, output = STDOUT)

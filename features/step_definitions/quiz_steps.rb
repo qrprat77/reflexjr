@@ -1,5 +1,5 @@
 Given(/^I am taking a "(.*?)" quiz$/) do |quiztype|
-  Qquiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
+  @quiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
 
 end
 
@@ -20,19 +20,26 @@ Then(/^the feedback is "(.*?)"$/) do |response|
   @prob.solve == response.to_i ? @prob.state.should == "Correct" : @prob.state.should =="Incorrect"  
 end
 
-When(/^my answers are "(.*?)"$/) do |state|
-  if state == "all_correct"
-		pending # generate a new quiz, answer with all correct answers
-	end
+When(/^my answers are "(.*?)"$/) do |st|
+  @quiz = ReflexJr::Quiz.new()
+  if st == "all_correct"
+		@quiz.quiz_probs.each do |prob|
+				ans = prob.first_term * prob.second_term
+				prob.answer(ans)
+		end
+	elsif st == "5_correct"  
+		@quiz.quiz_probs[0..4].each do |prob|
+				ans = prob.first_term * prob.second_term
+				prob.answer(ans)
+		end	
+	#else if st == some other value		
+	end #end if
 end
-
 Then(/^my score is "(.*?)"$/) do |scr|
-   @quiz.score.should == scr # score expressed as whole number
+   @quiz.score.should == scr.to_i # score expressed as whole number
 end
 
 Then(/^each wrong "(.*?)" is added to my file$/) do |equation|
-	@quiz.problems.each do |wrong_ans|
-		
-	end# equation to represent a missed problem. Gets put into a file.
+	pending #equation to represent a missed problem. Gets put into a file.
 end
 
