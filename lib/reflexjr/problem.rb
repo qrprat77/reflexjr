@@ -12,7 +12,7 @@ class Problem
 			if @type == :times
 				return @first_term * @second_term
 			else
-				return 1
+				 #raise an error about not being able to #{@type} 
 			end
 		end
 		

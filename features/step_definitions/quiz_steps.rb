@@ -1,5 +1,5 @@
 Given(/^I am taking a "(.*?)" quiz$/) do |quiztype|
-  quiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
+  Qquiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
 
 end
 
@@ -26,11 +26,13 @@ When(/^my answers are "(.*?)"$/) do |state|
 	end
 end
 
-Then(/^my score is "(.*?)"$/) do |score|
-   # score expressed as whole number
+Then(/^my score is "(.*?)"$/) do |scr|
+   @quiz.score.should == scr # score expressed as whole number
 end
 
 Then(/^each wrong "(.*?)" is added to my file$/) do |equation|
-  pending # equation to represent a missed problem. Gets put into a file.
+	@quiz.problems.each do |wrong_ans|
+		
+	end# equation to represent a missed problem. Gets put into a file.
 end
 

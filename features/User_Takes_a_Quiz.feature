@@ -32,5 +32,5 @@ collect.
 		|  times | all_correct |  100  |   nil    |
 		
 		Scenarios: Katie answers some questions incorrectly
-		|  type  |    state     | score  | equation |
-		|  times | some_correct |  <100  |    >0    |
+		|  type  |  state    | score  | equation |
+		|  times | 5_correct |  50    |    >0    |
