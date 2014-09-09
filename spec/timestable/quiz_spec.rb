@@ -7,27 +7,27 @@ module ReflexJr
 	describe "Quiz" do
 		quiz = ReflexJr::Quiz.new()
 		it "Should populate a new quiz with a default of 10 problems" do
-			quiz.quiz_probs.count.should == 10
+			expect(quiz.quiz_probs.count).to eq 10
 		end
 		
 		it "Should have a default quiz type of 'times'" do
-			quiz.quiz_type.should == :times
+			expect(quiz.quiz_type).to eq :times
 		end
 		
 		it "Should populate a new quiz with any number of chosen problems" do
 			quiz = ReflexJr::Quiz.new(5)
-			quiz.quiz_probs.count.should == 5
+			expect(quiz.quiz_probs.count).to eq 5
 		end
 		
 		it "Should have a math problem in each math_probs spot" do
 			quiz.quiz_probs.each do |problem|
-				problem.class.should == ReflexJr::Problem
+				expect(problem).to be_instance_of(ReflexJr::Problem)
 			end
 		end
 		
 		it "Should have an action type of times in each problem" do
 			quiz.quiz_probs.each do |problem|
-				problem.type.should == :times
+				expect(problem.type).to eq :times
 			end
 		end
 		
