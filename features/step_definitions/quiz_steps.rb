@@ -6,9 +6,8 @@ end
 When(/^I answer the problem "(.*?)" "(.*?)" "(.*?)" with "(.*?)"$/) do |fir_num, typ, sec_num, ans|
   @fir_num = fir_num.to_i
   @sec_num = sec_num.to_i
-   
-  @prob = ReflexJr::Problem.new(typ.to_sym, @fir_num, @sec_num)
-  if typ == "times" #this is testing the behavior of the app, refac out to spec?
+  if typ == "times" 
+		@prob = ReflexJr::Problem.new("*", @fir_num, @sec_num)
 		expect(@prob.solve).to eq(@fir_num * @sec_num)
 	#else <other math operand>
 	end

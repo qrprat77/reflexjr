@@ -35,6 +35,17 @@ module ReflexJr
 			expect(quiz.error_list).to be_instance_of(Array)
 		end
 		
+		it "populates the error_list array with Error objects" do
+			badquiz= ReflexJr::Quiz.new()
+			badquiz.quiz_probs.each do |prob|
+				prob.answer(999)
+			end
+			
+			expect(badquiz.error_list).to_not be_empty
+			
+			badquiz.error_list.each {|err| expect(err).to be_instance_of(ReflexJr::Error)}
+		end
+		
 	end #describe Quiz
 
 

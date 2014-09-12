@@ -1,15 +1,18 @@
 module ReflexJr
 class Quiz 
-	attr_accessor :quiz_probs, :quiz_type, :error_list 
+	attr_accessor :quiz_probs, :quiz_type
 								
 								
 	OPERATOR ={times: "*", add: "+", subtract: "-"}
 														 
 		def initialize(q_size=10, q_type=:times)
-			@error_list = []
 			@quiz_probs = [] 
 			@score = 0
-			@quiz_type = OPERATOR[q_type]
+			if OPERATOR.keys.include?(q_type)
+				@quiz_type = OPERATOR[q_type]
+			else
+				@quiz_type = q_type
+			end
 				q_size.times do
 					@quiz_probs.push(ReflexJr::Problem.new(@quiz_type, rand(10)+1, rand(10)+1))
 				end
@@ -35,6 +38,16 @@ class Quiz
 				prob.answer(ans)
 				@output.puts prob.state
 			end
+		end
+		
+		def error_list
+			errors = [] 
+			 @quiz_probs.each do |prob|
+					if prob.state == "Incorrect" 
+						errors.push(ReflexJr::Error.new(prob.first_term, prob.second_term, prob.type))
+					end
+				end
+				errors
 		end
 		
 		

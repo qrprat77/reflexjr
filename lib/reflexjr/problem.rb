@@ -13,7 +13,12 @@ class Problem
 		end
 		
 		def answer(input)
-			input == self.solve ? @state = "Correct" : @state = "Incorrect"
+			if input == self.solve 
+				@state = "Correct" 
+			else 
+				@state = "Incorrect"
+			end
+			
 		end
 			
 	end # class Problem
