@@ -1,11 +1,15 @@
 module ReflexJr
 class Quiz 
-	attr_accessor :quiz_probs, :quiz_type, :error_list
+	attr_accessor :quiz_probs, :quiz_type, :error_list 
+								
+								
+	OPERATOR ={times: "*", add: "+", subtract: "-"}
+														 
 		def initialize(q_size=10, q_type=:times)
 			@error_list = []
 			@quiz_probs = [] 
 			@score = 0
-			@quiz_type = q_type
+			@quiz_type = OPERATOR[q_type]
 				q_size.times do
 					@quiz_probs.push(ReflexJr::Problem.new(@quiz_type, rand(10)+1, rand(10)+1))
 				end

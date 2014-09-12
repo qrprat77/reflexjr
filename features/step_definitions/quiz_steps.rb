@@ -66,7 +66,7 @@ end
 Then(/^I receive the errors as error objects$/) do
 	expect(@errors).to_not be_empty
   @errors.each do |err|
-		expect(true).to eq(false)
+		expect(err).to be_instance_of(ReflexJr::Error)
 	end
 end
 

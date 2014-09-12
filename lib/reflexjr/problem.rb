@@ -9,11 +9,7 @@ class Problem
 		end #initialize
 		
 		def solve
-			if @type == :times
-				return @first_term * @second_term
-			else
-				 #raise an error about not being able to #{@type} 
-			end
+			@first_term.send(@type, @second_term)
 		end
 		
 		def answer(input)

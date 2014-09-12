@@ -10,8 +10,8 @@ module ReflexJr
 			expect(quiz.quiz_probs.count).to eq 10
 		end
 		
-		it "Should have a default quiz type of 'times'" do
-			expect(quiz.quiz_type).to eq :times
+		it "Should have a default quiz type of '*'" do
+			expect(quiz.quiz_type).to eq "*"
 		end
 		
 		it "Should populate a new quiz with any number of chosen problems" do
@@ -25,9 +25,9 @@ module ReflexJr
 			end
 		end
 		
-		it "Should have an action type of times in each problem" do
+		it "Should have a string representation of the operator" do
 			quiz.quiz_probs.each do |problem|
-				expect(problem.type).to eq :times
+				expect(problem.type).to eq "*"
 			end
 		end
 		
