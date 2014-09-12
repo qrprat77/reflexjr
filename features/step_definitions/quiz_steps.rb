@@ -9,22 +9,26 @@ When(/^I answer the problem "(.*?)" "(.*?)" "(.*?)" with "(.*?)"$/) do |fir_num,
    
   @prob = ReflexJr::Problem.new(typ.to_sym, @fir_num, @sec_num)
   if typ == "times" #this is testing the behavior of the app, refac out to spec?
-		@prob.solve.should == (@fir_num * @sec_num)
+		expect(@prob.solve).to eq(@fir_num * @sec_num)
 	#else <other math operand>
 	end
 end
 
 Then(/^the feedback is "(.*?)"$/) do |response|
-  @prob.state.should == "Not answered"
+  expect(@prob.state).to eq("Not answered")
   @prob.answer(response.to_i)
-  @prob.solve == response.to_i ? @prob.state.should == "Correct" : @prob.state.should =="Incorrect"  
+  if @prob.solve == response.to_i 
+		expect(@prob.state).to eq("Correct")
+	else 
+		expect(@prob.state).to eq("Incorrect")
+	end
 end
 
 When(/^my answers are "(.*?)"$/) do |st|
   @quiz = ReflexJr::Quiz.new()
   if st == "all_correct"
 		@quiz.quiz_probs.each do |prob|
-				ans = prob.first_term * prob.second_term
+				ans = prob.first_term * prob.second_term #hackey implementaton
 				prob.answer(ans)
 		end
 	elsif st == "5_correct"  
@@ -35,11 +39,37 @@ When(/^my answers are "(.*?)"$/) do |st|
 	#else if st == some other value		
 	end #end if
 end
+
 Then(/^my score is "(.*?)"$/) do |scr|
-   @quiz.score.should == scr.to_i # score expressed as whole number
+   expect(@quiz.score).to eq(scr.to_i) # score expressed as whole number
 end
 
-Then(/^each wrong "(.*?)" is added to my file$/) do |equation|
-	pending #equation to represent a missed problem. Gets put into a file.
+Given(/^some questions in a quiz are wrong$/) do
+  @bad_quiz = ReflexJr::Quiz.new()
+  
+  @bad_quiz.quiz_probs[0..4].each do |prob|
+		ans = prob.first_term * prob.second_term
+		prob.answer(ans)
+	end
+	@bad_quiz.quiz_probs[5..9].each do |prob|
+		ans = (prob.first_term + 1) * (prob.second_term + 1)
+		prob.answer(ans)
+	end
+	
+  
 end
+
+When(/^I ask the quiz for all the errors$/) do
+  @errors = @bad_quiz.error_list
+end
+
+Then(/^I receive the errors as error objects$/) do
+	expect(@errors).to_not be_empty
+  @errors.each do |err|
+		expect(true).to eq(false)
+	end
+end
+
+
+
 

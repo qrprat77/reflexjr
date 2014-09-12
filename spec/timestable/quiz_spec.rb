@@ -31,6 +31,10 @@ module ReflexJr
 			end
 		end
 		
+		it "has a method called :error_list that returns an array" do
+			expect(quiz.error_list).to be_instance_of(Array)
+		end
+		
 	end #describe Quiz
 
 

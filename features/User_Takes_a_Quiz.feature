@@ -25,12 +25,18 @@ collect.
 		Given I am taking a "<type>" quiz
 		When my answers are "<state>"
 		Then my score is "<score>" 
-		And each wrong "<equation>" is added to my file
+		
 		
 		Scenarios: Katie answers all questions correctly
-		|  type  |    state    | score | equation |
-		|  times | all_correct |  100  |   nil    |
+		|  type  |    state    | score |
+		|  times | all_correct |  100  |
 		
 		Scenarios: Katie answers some questions incorrectly
-		|  type  |  state    | score  | equation |
-		|  times | 5_correct |  50    |    >0    |
+		|  type  |  state    | score  |
+		|  times | 5_correct |  50    |
+		
+	Scenario: Katie's incorrect answers are each returned as an error object.
+	
+		Given some questions in a quiz are wrong
+		When I ask the quiz for all the errors
+		Then I receive the errors as error objects
