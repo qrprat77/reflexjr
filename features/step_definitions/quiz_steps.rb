@@ -9,7 +9,9 @@ When(/^I answer the problem "(.*?)" "(.*?)" "(.*?)" with "(.*?)"$/) do |fir_num,
   if typ == "times" 
 		@prob = ReflexJr::Problem.new("*", @fir_num, @sec_num)
 		expect(@prob.solve).to eq(@fir_num * @sec_num)
-	#else <other math operand>
+	elsif typ == "add"
+		@prob = ReflexJr::Problem.new("+", @fir_num, @sec_num)
+		expect(@prob.solve).to eq(@fir_num + @sec_num)
 	end
 end
 
