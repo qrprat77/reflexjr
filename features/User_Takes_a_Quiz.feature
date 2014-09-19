@@ -14,14 +14,14 @@ collect.
 		Then the feedback is "<response>"
 		
 		Scenarios: Katie answers correctly
-		|    type   | first_num | second_num | answer | response |
-		|    times  |     6     |      8     |    48  | correct  |
-		|    add    |     2     |      4     |    6   | correct  |
-		| subtracts |     8     |			 5     |    3   | correct  |
+		| type | first_num | second_num | answer | response |
+		|   *  |     6     |      8     |    48  | correct  |
+		|   +  |     2     |      4     |    6   | correct  |
+		|   -  |     8     |		  5     |    3   | correct  |
 		
 		Scenarios: Katie answers incorrectly
 		|  type  | first_num | second_num | answer | response |
-		|  times |     6     |      8     |    84  | incorrect|
+		|  *     |     6     |      8     |    84  | incorrect|
 		 
 	Scenario Outline: Katie takes the quiz
 		Given I am taking a "<type>" quiz

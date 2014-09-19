@@ -1,3 +1,4 @@
+
 Given(/^I am taking a "(.*?)" quiz$/) do |quiztype|
   @quiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
 
@@ -6,13 +7,9 @@ end
 When(/^I answer the problem "(.*?)" "(.*?)" "(.*?)" with "(.*?)"$/) do |fir_num, typ, sec_num, ans|
   @fir_num = fir_num.to_i
   @sec_num = sec_num.to_i
-  if typ == "times" 
-		@prob = ReflexJr::Problem.new("*", @fir_num, @sec_num)
-		expect(@prob.solve).to eq(@fir_num * @sec_num)
-	elsif typ == "add"
-		@prob = ReflexJr::Problem.new("+", @fir_num, @sec_num)
-		expect(@prob.solve).to eq(@fir_num + @sec_num)
-	end
+	@prob = ReflexJr::Problem.new(typ, @fir_num, @sec_num)
+	expect(@prob.solve).to eq(@fir_num.send(typ, @sec_num))
+	
 end
 
 Then(/^the feedback is "(.*?)"$/) do |response|
