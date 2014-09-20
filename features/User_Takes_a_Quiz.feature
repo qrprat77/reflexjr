@@ -31,11 +31,11 @@ collect.
 		
 		Scenarios: Katie answers all questions correctly
 		|  type  |    state    | score |
-		|  times | all_correct |  100  |
+		|   *    | all_correct |  100  |
 		
 		Scenarios: Katie answers some questions incorrectly
 		|  type  |  state    | score  |
-		|  times | 5_correct |  50    |
+		|    *   | 5_correct |  50    |
 		
 	Scenario: Katie's incorrect answers are each returned as an error object.
 	

@@ -1,6 +1,7 @@
 
 Given(/^I am taking a "(.*?)" quiz$/) do |quiztype|
-  @quiz = ReflexJr::Quiz.new() #Start a new ReflexJR Quiz
+  @quiz = ReflexJr::Quiz.new() 
+  @typ = quiztype #Start a new ReflexJR Quiz
 
 end
 
@@ -26,12 +27,12 @@ When(/^my answers are "(.*?)"$/) do |st|
   @quiz = ReflexJr::Quiz.new()
   if st == "all_correct"
 		@quiz.quiz_probs.each do |prob|
-				ans = prob.first_term * prob.second_term #hackey implementaton
+				ans = prob.first_term.send(@typ, prob.second_term)
 				prob.answer(ans)
 		end
 	elsif st == "5_correct"  
 		@quiz.quiz_probs[0..4].each do |prob|
-				ans = prob.first_term * prob.second_term
+				ans = prob.first_term.send(@typ, prob.second_term)
 				prob.answer(ans)
 		end	
 	#else if st == some other value		
