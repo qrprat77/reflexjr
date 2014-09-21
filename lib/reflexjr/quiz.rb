@@ -31,7 +31,7 @@ class Quiz
 		def takequiz(input = STDIN, output = STDOUT)
 			@input = input
 			@output = output
-			@output.puts "Answer the questions to see if you know your times tables!"
+			@output.puts "Answer the questions to see if you know how to #{@quiz_type}!"
 			@quiz_probs.each do |prob|
 				@output.puts prob.first_term.to_s + " " + prob.type.to_s + " " + prob.second_term.to_s
 				ans = @input.gets.chomp.to_i
